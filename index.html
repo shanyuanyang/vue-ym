@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <p v-html="tag"></p>
+    <p v-text="msg"></p>
+    <p>大家好，msg的值是{{msg}}</p>
+    <p>大家好，tag的值是{{tag}}</p>
+    <input type="text" v-model="msg">
+    <button v-on:click="clickFn">按钮</button> -->
+    <p>大家好，tag的值是{{tag}}</p>
+    <h1>{{car.brand}}</h1>
+    <h1>{{car.color}}</h1>
+    <button v-on:click="clickFn">按钮</button>
+  </div>
+  <script src="./src/compile.js"></script>
+  <script src="./src/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello vue',
+        tag: '哈哈哈',
+        car: {
+          brand: "奥迪",
+          color: 'red'
+        }
+      },
+      methods: {
+        clickFn() {
+          console.log(this.$data.msg)
+          this.$data.msg = "修改了"
+        }
+      }
+    })
+    console.log(vm)
+  </script>
+</body>
+
+</html>
