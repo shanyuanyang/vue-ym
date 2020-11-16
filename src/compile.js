@@ -99,12 +99,27 @@ class Compile {
 let CompileUtil = {
   text(node, vm, expr) {
     node.textContent = this.getVMValue(vm, expr);
+    debugger
+    new watcher(vm, expr, (newValue, oldValue) => {
+      console.log("进入watcher")
+      node.textContent = newValue;
+    })
   },
   html(node, vm, expr) {
     node.innerHTML = this.getVMValue(vm, expr);
+    new watcher(vm, expr, (newValue, oldValue) => {
+      console.log("进入watcher")
+
+      node.innerHTML = newValue;
+    })
   },
   model(node, vm, expr) {
     node.value = this.getVMValue(vm, expr);
+    new watcher(vm, expr, (newValue, oldValue) => {
+      console.log("进入watcher")
+
+      node.value = newValue;
+    })
   },
   // 函数
   eventHandler(node, vm, type, expr) {
