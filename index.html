@@ -20,6 +20,8 @@
     <h1>{{car.color}}</h1>
     <button v-on:click="clickFn">按钮</button>
   </div>
+  <!-- <script src="./src/watch.js"></script> -->
+  <script src="./src/observe.js"></script>
   <script src="./src/compile.js"></script>
   <script src="./src/vue.js"></script>
   <script>
@@ -36,11 +38,10 @@
       methods: {
         clickFn() {
           console.log(this.$data.msg)
-          this.$data.msg = "修改了"
+          // this.$data.msg = "修改了"
         }
       }
     })
-    console.log(vm)
   </script>
 </body>
 

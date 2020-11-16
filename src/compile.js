@@ -106,6 +106,7 @@ let CompileUtil = {
   model(node, vm, expr) {
     node.value = this.getVMValue(vm, expr);
   },
+  // 函数
   eventHandler(node, vm, type, expr) {
     let eventType = type.split(':')[1];
     let fn = vm.$methods && vm.$methods[expr];
@@ -119,13 +120,16 @@ let CompileUtil = {
     expr.split('.').forEach(i => {
       data = data[i];
     })
+    // console.log(data)
     return data;
   },
+  // 文本节点
   mustache(node, vm) {
     let txt = node.textContent;
     let reg = /\{\{(.+)\}\}/;
     if (reg.test(txt)) {
       let expr = RegExp.$1;
+      // console.log(expr)
       node.textContent = txt.replace(reg, this.getVMValue(vm, expr))
     }
   }
