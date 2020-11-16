@@ -12,13 +12,13 @@ class watcher {
     this.expr = expr;
     this.cb = cb
 
-    debugger
+    // debugger
     // 存储到Dep.target
     Dep.target = this;
 
 
     // 需要把旧值存起来
-    this.oldValue = this.getVMValue(this.vm, this.expr);
+    this.oldValue = this.getVMValue(vm, expr);
 
     // 清空Dep.target
 

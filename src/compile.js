@@ -99,7 +99,7 @@ class Compile {
 let CompileUtil = {
   text(node, vm, expr) {
     node.textContent = this.getVMValue(vm, expr);
-    debugger
+    console.log(expr)
     new watcher(vm, expr, (newValue, oldValue) => {
       console.log("进入watcher")
       node.textContent = newValue;
@@ -114,10 +114,13 @@ let CompileUtil = {
     })
   },
   model(node, vm, expr) {
-    node.value = this.getVMValue(vm, expr);
+    let that = this;
+    node.value = that.getVMValue(vm, expr);
+    node.addEventListener('input', function () {
+      that.setVMValue(vm, expr, this.value)
+    })
     new watcher(vm, expr, (newValue, oldValue) => {
-      console.log("进入watcher")
-
+      // console.log("进入watcher")
       node.value = newValue;
     })
   },
@@ -146,7 +149,22 @@ let CompileUtil = {
       let expr = RegExp.$1;
       // console.log(expr)
       node.textContent = txt.replace(reg, this.getVMValue(vm, expr))
+      new watcher(vm, expr, (newValue, oldValue) => {
+        console.log("进入watcher")
+        node.value = txt.replace(reg, newValue);
+      })
     }
+  },
+
+  setVMValue(vm, expr, value) {
+    let data = vm.$data;
+    let arr = expr.split('.');
+    arr.forEach((key, index) => {
+      if (index < arr.length - 1) {
+        data = data[key]
+      } else {
+        data[key] = value
+      }
+    })
   }
 }
-

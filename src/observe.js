@@ -30,8 +30,8 @@ class observer {
 
   // 定义响应式的数据，（也就是数据劫持）
   defineReactive(obj, key, value) {
-    debugger
-    console.log(Dep.target)
+    // debugger
+    // console.log(Dep.target)
     let that = this;
     let dep = new Dep();
     Object.defineProperty(obj, key, {
@@ -40,7 +40,7 @@ class observer {
       get() {
         // 如果Dep.target中有watcher对象，存储到订阅者中
         Dep.target && dep.addSub(Dep.target)
-        // console.log(`你获取了值${value}`)
+        // console.log(dep)
         return value
       },
       set(newValue) {
@@ -51,6 +51,8 @@ class observer {
         value = newValue;
         // 如果newValue是个对象，也应该进行劫持
         that.walk(newValue)
+        // 通知订阅者更新内容
+        dep.notify()
 
       }
     })
